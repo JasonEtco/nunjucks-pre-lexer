@@ -1,11 +1,11 @@
-import { getLibraryData } from '../src'
+import { lexer } from '../src'
 
-describe('getLibraryData', () => {
+describe('lexer', () => {
   it('gets the data of an object lookup', async () => {
     const src = '{{ lib.test }}'
     const obj = { lib: { test: true } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual(obj)
   })
 
@@ -13,7 +13,7 @@ describe('getLibraryData', () => {
     const src = '{{ lib.test() }}'
     const obj = { lib: { async test () { return 'a value' } } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.lib.test()).toBe('a value')
   })
@@ -22,7 +22,7 @@ describe('getLibraryData', () => {
     const src = '{{ lib.test("Example") }}'
     const obj = { lib: { async test (str: string) { return str } } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.lib.test()).toBe('Example')
   })
@@ -31,7 +31,7 @@ describe('getLibraryData', () => {
     const src = '{{ lib.test({ foo: "Example" }) }}'
     const obj = { lib: { async test ({ foo }: { foo: string}) { return foo } } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.lib.test()).toBe('Example')
   })
@@ -40,7 +40,7 @@ describe('getLibraryData', () => {
     const src = '{{ lib.test([1, 2, 3]) }}'
     const obj = { lib: { async test (arr: number[]) { return arr[1] } } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.lib.test()).toBe(2)
   })
@@ -49,7 +49,7 @@ describe('getLibraryData', () => {
     const src = '{{ lib.test({ foo: { bar: { bork: false, baz: true } } }) }}'
     const obj = { lib: { async test (o: any) { return o.foo.bar.baz } } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.lib.test()).toBe(true)
   })
@@ -58,7 +58,7 @@ describe('getLibraryData', () => {
     const src = '{{ test() }}'
     const obj = { async test () { return 'hiya' } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toMatchSnapshot()
     expect(data.test()).toBe('hiya')
   })
@@ -67,7 +67,7 @@ describe('getLibraryData', () => {
     const src = '{% if lib.test %}hello{% endif %}'
     const obj = { lib: { test: true } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: true } })
   })
 
@@ -75,7 +75,7 @@ describe('getLibraryData', () => {
     const src = '{% if true %}{{ lib.test }}{% endif %}'
     const obj = { lib: { test: true } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: true } })
   })
 
@@ -83,7 +83,7 @@ describe('getLibraryData', () => {
     const src = '{% if true %}true{% else %}{{ lib.test }}{% endif %}'
     const obj = { lib: { test: true } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: true } })
   })
 
@@ -91,7 +91,7 @@ describe('getLibraryData', () => {
     const src = '{% for thing in lib.test %}hello{% endfor %}'
     const obj = { lib: { test: [true, false] } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: [true, false] } })
   })
 
@@ -99,7 +99,7 @@ describe('getLibraryData', () => {
     const src = '{% for thing in things %}{{ lib.test }}{% endfor %}'
     const obj = { lib: { test: true } }
 
-    const data = await getLibraryData(obj, src)
+    const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: true } })
   })
 })

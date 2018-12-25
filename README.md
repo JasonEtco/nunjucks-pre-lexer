@@ -11,7 +11,7 @@ $ npm install nunjucks-pre-lexer
 ```
 
 ```js
-const lexer = require('nunjucks-pre-lexer')
+const { lexer } = require('nunjucks-pre-lexer')
 
 const templateStr = '{{ myObject.property }}'
 
@@ -54,3 +54,7 @@ Additionally, this lets us get the data the the template is using - and nothing 
 ### Ease of writing templates
 
 Asynchronous templating is a challenge - Nunjucks has shaky support, and a good, consistent usage of it requires some funky filters. This avoids any need for "intentional" asynchronicity by pre-fetching any data that the template needs.
+
+---
+
+Question? Comments? [Open an issue](https://github.com/JasonEtco/nunjucks-pre-lexer/issues/new), happy to talk through it!
