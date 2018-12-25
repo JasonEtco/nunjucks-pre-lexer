@@ -39,6 +39,8 @@ const data = lexer(schema, templateStr)
 // -> { getPosts: () => ([{ title: 'A post' }]) }
 ```
 
+Now, when we go to render that template (using `nunjucks.render` as normal), we've prepared the return value of the `getPosts` function - so its evaluates immediately.
+
 ## Why
 
 Two main reasons: performance, and ease of writing templates.
@@ -51,4 +53,4 @@ Additionally, this lets us get the data the the template is using - and nothing 
 
 ### Ease of writing templates
 
-Asynchronous templating is a challenge - Nunjucks has shaky support, and a good, consistent usage of it requires some funky filters. This avoids any need for "intentional" asynchronicity.
+Asynchronous templating is a challenge - Nunjucks has shaky support, and a good, consistent usage of it requires some funky filters. This avoids any need for "intentional" asynchronicity by pre-fetching any data that the template needs.
