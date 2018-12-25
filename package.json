@@ -1,7 +1,7 @@
 {
   "name": "nunjucks-pre-lexer",
   "version": "0.0.1",
-  "description": "A tool for identifying and fetcihng the data that a Nunjucks template expects.",
+  "description": "A tool for identifying and fetching the data that a Nunjucks template expects.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
