@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseChildren returns the expected array 1`] = `
+Array [
+  Object {
+    "body": NodeList {
+      "children": Array [
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 10,
+              "lineno": 0,
+              "value": "hello",
+            },
+          ],
+          "colno": 9,
+          "lineno": 0,
+        },
+      ],
+      "colno": 0,
+      "lineno": 0,
+    },
+    "colno": 1,
+    "cond": subclass {
+      "colno": 4,
+      "lineno": 0,
+      "value": true,
+    },
+    "else_": null,
+    "lineno": 0,
+    "typename": "If",
+  },
+]
+`;
+
+exports[`parseChildren returns the expected array with nested children 1`] = `
+Array [
+  Object {
+    "body": NodeList {
+      "children": Array [
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 16,
+              "lineno": 1,
+              "value": "hello",
+            },
+          ],
+          "colno": 15,
+          "lineno": 1,
+        },
+      ],
+      "colno": 0,
+      "lineno": 0,
+    },
+    "colno": 7,
+    "cond": subclass {
+      "colno": 10,
+      "lineno": 1,
+      "value": true,
+    },
+    "else_": null,
+    "lineno": 1,
+    "typename": "If",
+  },
+  Object {
+    "arr": subclass {
+      "colno": 19,
+      "lineno": 2,
+      "value": "array",
+    },
+    "body": NodeList {
+      "children": Array [
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 25,
+              "lineno": 2,
+              "value": "
+        ",
+            },
+          ],
+          "colno": 25,
+          "lineno": 2,
+        },
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 13,
+              "lineno": 3,
+              "target": subclass {
+                "colno": 9,
+                "lineno": 3,
+                "value": "test",
+              },
+              "val": subclass {
+                "colno": 14,
+                "lineno": 3,
+                "value": "example",
+              },
+            },
+          ],
+          "colno": 8,
+          "lineno": 3,
+        },
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 22,
+              "lineno": 3,
+              "value": "
+        ",
+            },
+          ],
+          "colno": 22,
+          "lineno": 3,
+        },
+        subclass {
+          "arr": subclass {
+            "colno": 23,
+            "lineno": 4,
+            "value": "nestedArray",
+          },
+          "body": NodeList {
+            "children": Array [
+              subclass {
+                "children": Array [
+                  subclass {
+                    "colno": 35,
+                    "lineno": 4,
+                    "value": "
+          ",
+                  },
+                ],
+                "colno": 35,
+                "lineno": 4,
+              },
+              subclass {
+                "children": Array [
+                  subclass {
+                    "args": NodeList {
+                      "children": Array [],
+                      "colno": 20,
+                      "lineno": 5,
+                    },
+                    "colno": 20,
+                    "lineno": 5,
+                    "name": subclass {
+                      "colno": 14,
+                      "lineno": 5,
+                      "target": subclass {
+                        "colno": 11,
+                        "lineno": 5,
+                        "value": "eat",
+                      },
+                      "val": subclass {
+                        "colno": 15,
+                        "lineno": 5,
+                        "value": "pizza",
+                      },
+                    },
+                  },
+                ],
+                "colno": 10,
+                "lineno": 5,
+              },
+              subclass {
+                "children": Array [
+                  subclass {
+                    "colno": 23,
+                    "lineno": 5,
+                    "value": "
+        ",
+                  },
+                ],
+                "colno": 23,
+                "lineno": 5,
+              },
+            ],
+            "colno": 0,
+            "lineno": 0,
+          },
+          "colno": 9,
+          "else_": null,
+          "lineno": 4,
+          "name": subclass {
+            "colno": 13,
+            "lineno": 4,
+            "value": "nested",
+          },
+        },
+        subclass {
+          "children": Array [
+            subclass {
+              "colno": 16,
+              "lineno": 6,
+              "value": "
+      ",
+            },
+          ],
+          "colno": 16,
+          "lineno": 6,
+        },
+      ],
+      "colno": 0,
+      "lineno": 0,
+    },
+    "colno": 7,
+    "else_": null,
+    "lineno": 2,
+    "name": subclass {
+      "colno": 11,
+      "lineno": 2,
+      "value": "item",
+    },
+    "typename": "For",
+  },
+]
+`;
