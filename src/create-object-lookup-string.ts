@@ -1,4 +1,6 @@
-function getValues (node, pieces = []) {
+import { Node } from './types'
+
+function getValues (node: Node, pieces: string[] = []): string[] {
   if (node.val && 'value' in node.val) {
     pieces.unshift(node.val.value)
   }
@@ -20,7 +22,7 @@ function getValues (node, pieces = []) {
   return pieces
 }
 
-module.exports = function createObjectLookupString (node) {
+export function createObjectLookupString (node: Node) {
   const values = getValues(node)
   return values.join('.')
 }

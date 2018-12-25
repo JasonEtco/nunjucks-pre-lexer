@@ -1,8 +1,9 @@
-const get = require('get-value')
-const set = require('set-value')
-const createObjectLookupString = require('../create-object-lookup-string')
+import get from 'get-value'
+import set from 'set-value'
+import { createObjectLookupString } from '../create-object-lookup-string'
+import { Node, FunCallType, ObjectType } from '../types'
 
-function returnObjectValue (node) {
+function returnObjectValue (node: ObjectType) {
   const key = node.key.value
 
   // The value for this key/value pair does not have children
@@ -15,15 +16,19 @@ function returnObjectValue (node) {
     const mapped = mapArguments(node.value)
     return { [key]: mapped.reduce((p, c) => ({ ...p, ...c }), {}) }
   }
+
+  throw new Error('This object does not have a value')
 }
 
-function mapArguments (args, returnArgs = []) {
+function mapArguments (args: Node, returnArgs: any[] = []) {
+  if (!args.children) return returnArgs
+
   for (const arg of args.children) {
     // This is an object or an array
     if (arg.children) {
       // This is an object, represented as a child Node
-      if (arg.children.every(child => 'key' in child && 'value' in child)) {
-        const argObject = arg.children.reduce((p, c) => ({ ...p, ...returnObjectValue(c) }), {})
+      if (arg.children.every((child: any) => 'key' in child && 'value' in child)) {
+        const argObject = arg.children.reduce((p: object, c: any) => ({ ...p, ...returnObjectValue(c) }), {})
         returnArgs.push(argObject)
         continue
       }
@@ -50,7 +55,7 @@ function mapArguments (args, returnArgs = []) {
   return returnArgs
 }
 
-module.exports = async function main (schema, node, data) {
+export async function FunCall (schema: object, node: FunCallType, data: object) {
   const lookupString = createObjectLookupString(node)
   const func = get(schema, lookupString)
 

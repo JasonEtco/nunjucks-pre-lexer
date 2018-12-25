@@ -1,3 +1,5 @@
+import { Node } from './types'
+
 /**
  * We care about:
  * LookupVal: `{{ foo.bar }}`, getting a property in an object
@@ -5,7 +7,7 @@
  */
 const IMPORTANT_TYPES = ['LookupVal', 'FunCall', 'If', 'For']
 
-module.exports = function parseChildren (children, nodes = []) {
+export function parseChildren (children: Node[], nodes: Node[] = []) {
   for (const child of children) {
     if (child.children) {
       parseChildren(child.children, nodes)
