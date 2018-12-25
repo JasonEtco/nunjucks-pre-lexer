@@ -2,7 +2,7 @@
 
 exports[`parseChildren returns the expected array 1`] = `
 Array [
-  Object {
+  subclass {
     "body": NodeList {
       "children": Array [
         subclass {
@@ -28,14 +28,13 @@ Array [
     },
     "else_": null,
     "lineno": 0,
-    "typename": "If",
   },
 ]
 `;
 
 exports[`parseChildren returns the expected array with nested children 1`] = `
 Array [
-  Object {
+  subclass {
     "body": NodeList {
       "children": Array [
         subclass {
@@ -61,9 +60,8 @@ Array [
     },
     "else_": null,
     "lineno": 1,
-    "typename": "If",
   },
-  Object {
+  subclass {
     "arr": subclass {
       "colno": 19,
       "lineno": 2,
@@ -213,7 +211,6 @@ Array [
       "lineno": 2,
       "value": "item",
     },
-    "typename": "For",
   },
 ]
 `;
