@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A tool for identifying and fetcihng the data that a Nunjucks template expects.",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "build": "rimraf lib && tsc -p tsconfig.json",
     "lint": "tslint --project tests",
@@ -14,7 +15,11 @@
     "nunjucks"
   ],
   "author": "Jason Etcovitch <jasonetco@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JasonEtco/nunjucks-pre-lexer/issues"
+  },
+  "homepage": "https://github.com/JasonEtco/nunjucks-pre-lexer#readme",
   "dependencies": {
     "get-value": "^3.0.1",
     "nunjucks": "^3.1.6",
