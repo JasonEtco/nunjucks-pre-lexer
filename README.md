@@ -15,17 +15,40 @@ const lexer = require('nunjucks-pre-lexer')
 
 const templateStr = '{{ myObject.property }}'
 
-// Requires a namespace
-const namespace = 'myObject'
+// The schema is an object that tells the lexer
+// how to get the data the template is asking for
+const schema = { myObject: { property: true } }
 
-// The schema is an object to 
-const schema = { property: true }
-
-const data = lexer(namespace, schema, templateStr)
-// -> { namespace: { property: true } }
+const data = lexer(schema, templateStr)
+// -> { myObject: { property: true } }
 ```
 
+This is a pretty mundane example because the value of `myObject.property` is hardcoded; now let's see what it looks like to fetch some data from our database in the same way:
 
-## How it works
+```js
+const templateStr = '{{ getPosts() }}'
+const schema = {
+  async getPosts() {
+    // Some asynchronous operation that queries the database.
+    // This can be anything at all!
+    return db.Post.findAll()
+  }
+}
 
-Like magic!
+const data = lexer(schema, templateStr)
+// -> { getPosts: [{ title: 'A post' }] }
+```
+
+## Why
+
+Two main reasons: performance, and ease of writing templates.
+
+### Performance
+
+With this method of understanding the requirements of a template, we can really aggressively cache the template itself, while still ensuring that we're getting the freshest data when we need it.
+
+Additionally, this lets us get the data the the template is using - and nothing more. We're letting the template define the data it needs, and then getting it.
+
+### Ease of writing templates
+
+Asynchronous templating is a challenge - Nunjucks has shaky support, and a good, consistent usage of it requires some funky filters. This avoids any need for "intentional" asynchronicity.
