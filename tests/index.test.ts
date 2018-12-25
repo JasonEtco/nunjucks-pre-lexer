@@ -1,4 +1,4 @@
-const getLibraryData = require('..')
+import { getLibraryData } from '../src'
 
 describe('getLibraryData', () => {
   it('gets the data of an object lookup', async () => {
@@ -20,7 +20,7 @@ describe('getLibraryData', () => {
 
   it('gets the return value of a function with arguments', async () => {
     const src = '{{ lib.test("Example") }}'
-    const obj = { lib: { async test (str) { return str } } }
+    const obj = { lib: { async test (str: string) { return str } } }
 
     const data = await getLibraryData(obj, src)
     expect(data).toMatchSnapshot()
@@ -29,7 +29,7 @@ describe('getLibraryData', () => {
 
   it('gets the return value of a function with arguments that are objects', async () => {
     const src = '{{ lib.test({ foo: "Example" }) }}'
-    const obj = { lib: { async test ({ foo }) { return foo } } }
+    const obj = { lib: { async test ({ foo }: { foo: string}) { return foo } } }
 
     const data = await getLibraryData(obj, src)
     expect(data).toMatchSnapshot()
@@ -38,7 +38,7 @@ describe('getLibraryData', () => {
 
   it('gets the return value of a function with arguments that are arrays', async () => {
     const src = '{{ lib.test([1, 2, 3]) }}'
-    const obj = { lib: { async test (arr) { return arr[1] } } }
+    const obj = { lib: { async test (arr: number[]) { return arr[1] } } }
 
     const data = await getLibraryData(obj, src)
     expect(data).toMatchSnapshot()
@@ -47,7 +47,7 @@ describe('getLibraryData', () => {
 
   it('gets the return value of a function with an argument of nested objects', async () => {
     const src = '{{ lib.test({ foo: { bar: { bork: false, baz: true } } }) }}'
-    const obj = { lib: { async test (o) { return o.foo.bar.baz } } }
+    const obj = { lib: { async test (o: any) { return o.foo.bar.baz } } }
 
     const data = await getLibraryData(obj, src)
     expect(data).toMatchSnapshot()

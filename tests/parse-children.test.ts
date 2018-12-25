@@ -1,5 +1,5 @@
-const { parser } = require('nunjucks')
-const parseChildren = require('../lib/parse-children')
+import { parser } from 'nunjucks'
+import { parseChildren } from '../src/parse-children'
 
 describe('parseChildren', () => {
   it('returns the expected array', () => {
