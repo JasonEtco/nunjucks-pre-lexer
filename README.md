@@ -1,6 +1,6 @@
 <h3 align="center">Nunjucks Pre-Lexer</h3>
 <p align="center">A tool for identifying and fetching the data that a <a href="https://mozilla.github.io/nunjucks">Nunjucks</a> template expects.<p>
-<p align="center"><a href="https://npmjs.com/package/nunjucks-pre-lexer"><img src="https://badgen.net/npm/v/nunjucks-pre-lexer" alt="NPM"></a> <a href="https://travis-ci.org/JasonEtco/nunjucks-pre-lexer"><img src="https://badgen.now.sh/travis/JasonEtco/nunjucks-pre-lexer" alt="Build Status"></a> <a href="https://codecov.io/gh/JasonEtco/nunjucks-pre-lexer/"><img src="https://badgen.now.sh/codecov/c/github/JasonEtco/nunjucks-pre-lexer" alt="Codecov"></a></p>
+<p align="center"><a href="https://npmjs.com/package/nunjucks-pre-lexer"><img src="https://badgen.net/npm/v/nunjucks-pre-lexer" alt="NPM"></a> <a href="https://travis-ci.com/JasonEtco/nunjucks-pre-lexer"><img src="https://badgen.now.sh/travis/JasonEtco/nunjucks-pre-lexer" alt="Build Status"></a> <a href="https://codecov.io/gh/JasonEtco/nunjucks-pre-lexer/"><img src="https://badgen.now.sh/codecov/c/github/JasonEtco/nunjucks-pre-lexer" alt="Codecov"></a></p>
 
 ## Usage
 
