@@ -1,6 +1,6 @@
+import { Node } from '../types'
 import { FunCall } from './FunCall'
 import { LookupVal } from './LookupVal'
-import { Node } from '../types'
 
 interface Parsers {
   FunCall: (schema: object, node: Node, data: any) => any

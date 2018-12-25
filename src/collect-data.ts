@@ -1,18 +1,18 @@
-import { parsers, ParserKeys } from './parsers'
 import { parseChildren } from './parse-children'
-import { Node, IfType, ForType } from './types'
+import { ParserKeys, parsers } from './parsers'
+import { ForType, IfType, Node } from './types'
 
 function isIf (node: Node | IfType): node is IfType {
-  return (<Node>node).typename === 'If'
+  return (node as Node).typename === 'If'
 }
 
 function isFor (node: Node | ForType): node is ForType {
-  return (<Node>node).typename === 'For'
+  return (node as Node).typename === 'For'
 }
 
 interface CollectDataArgs {
   schema: any
-  nodes: (Node | ForType | IfType)[]
+  nodes: Array<Node | ForType | IfType>
 }
 
 export async function collectData ({ schema, nodes }: CollectDataArgs, data = {}) {
@@ -22,12 +22,12 @@ export async function collectData ({ schema, nodes }: CollectDataArgs, data = {}
         collectData({ schema, nodes: [node.cond] }, data),
         collectData({ schema, nodes: parseChildren(node.body.children) }, data)
       ]
-  
+
       if (node.else_) {
         const elseChildren = parseChildren(node.else_.children)
         promises.push(collectData({ schema, nodes: elseChildren }, data))
       }
-  
+
       await Promise.all(promises)
       continue
     }
@@ -35,7 +35,7 @@ export async function collectData ({ schema, nodes }: CollectDataArgs, data = {}
     if (isFor(node)) {
       // The iterable of the for loop
       await collectData({ schema, nodes: [node.arr] }, data)
-  
+
       // The body of the for loop
       const bodyChildren = parseChildren(node.body.children)
       await collectData({ schema, nodes: bodyChildren }, data)

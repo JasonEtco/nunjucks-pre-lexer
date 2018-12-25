@@ -55,7 +55,7 @@ describe('createObjectLookupString', () => {
         typename: 'SomeNode',
         val: { typename: 'SomeNode', value: 'bar' },
         name: {
-          typename: 'SomeNode', 
+          typename: 'SomeNode',
           val: { typename: 'SomeNode', value: 'foo' }
         }
       }

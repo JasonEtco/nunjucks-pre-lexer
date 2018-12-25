@@ -1,6 +1,6 @@
 import { parser } from 'nunjucks'
-import { parseChildren } from './parse-children'
 import { collectData } from './collect-data'
+import { parseChildren } from './parse-children'
 
 export async function getLibraryData (schema: object, templateString: string): Promise<any> {
   const ast = parser.parse(templateString)
