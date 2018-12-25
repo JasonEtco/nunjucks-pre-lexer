@@ -12,15 +12,12 @@ function returnObjectValue (node: ObjectType) {
   }
 
   // This key's value has children (its an array or an object)
-  if (node.value.children) {
-    const mapped = mapArguments(node.value)
-    return { [key]: mapped.reduce((p, c) => ({ ...p, ...c }), {}) }
-  }
-
-  throw new Error('This object does not have a value')
+  const mapped = mapArguments(node.value)
+  return { [key]: mapped.reduce((p, c) => ({ ...p, ...c }), {}) }
 }
 
-function mapArguments (args: Node, returnArgs: any[] = []) {
+function mapArguments (args: Node): any[] {
+  const returnArgs: any[] = []
   if (!args.children) return returnArgs
 
   for (const arg of args.children) {
