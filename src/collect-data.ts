@@ -1,6 +1,6 @@
-const parsers = require('./parsers')
+import { parsers, ParserKeys } from './parsers'
 import { parseChildren } from './parse-children'
-import { Node, IfType, ForType, FunCallType } from './types'
+import { Node, IfType, ForType } from './types'
 
 function isIf (node: Node | IfType): node is IfType {
   return (<Node>node).typename === 'If'
@@ -12,7 +12,7 @@ function isFor (node: Node | ForType): node is ForType {
 
 interface CollectDataArgs {
   schema: any
-  nodes: (Node | ForType | IfType | FunCallType)[]
+  nodes: (Node | ForType | IfType)[]
 }
 
 export async function collectData ({ schema, nodes }: CollectDataArgs, data = {}) {
@@ -43,7 +43,7 @@ export async function collectData ({ schema, nodes }: CollectDataArgs, data = {}
     }
 
     if (!(node.typename in parsers)) continue
-    await parsers[node.typename](schema, node, data)
+    await parsers[node.typename as ParserKeys](schema, node, data)
   }
 
   return data

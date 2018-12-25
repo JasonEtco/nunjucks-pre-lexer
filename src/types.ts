@@ -5,6 +5,7 @@ export interface Node {
   val?: Node
   target?: Node
   name?: Node
+  args?: Node
 }
 
 interface Body extends Node {
@@ -22,11 +23,6 @@ export interface ForType extends Node {
   typename: 'For'
   arr: Node
   body: Body
-}
-
-export interface FunCallType extends Node {
-  typename: 'FunCall'
-  args: Node
 }
 
 interface Value {

@@ -1,7 +1,7 @@
 import get from 'get-value'
 import set from 'set-value'
 import { createObjectLookupString } from '../create-object-lookup-string'
-import { Node, FunCallType, ObjectType } from '../types'
+import { Node, ObjectType } from '../types'
 
 function returnObjectValue (node: ObjectType) {
   const key = node.key.value
@@ -55,14 +55,14 @@ function mapArguments (args: Node, returnArgs: any[] = []) {
   return returnArgs
 }
 
-export async function FunCall (schema: object, node: FunCallType, data: object) {
+export async function FunCall (schema: object, node: Node, data: object) {
   const lookupString = createObjectLookupString(node)
   const func = get(schema, lookupString)
 
   // TODO: Throw if options.throwOnUndefined
   if (!func) return
 
-  const argValues = mapArguments(node.args)
+  const argValues = node.args ? mapArguments(node.args) : []
   const val = await func(...argValues)
   set(data, lookupString, () => val)
 }
