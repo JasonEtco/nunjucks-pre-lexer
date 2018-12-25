@@ -14,7 +14,8 @@ describe('getLibraryData', () => {
     const obj = { lib: { async test () { return 'a value' } } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ lib: { test: 'a value' } })
+    expect(data).toMatchSnapshot()
+    expect(data.lib.test()).toBe('a value')
   })
 
   it('gets the return value of a function with arguments', async () => {
@@ -22,7 +23,8 @@ describe('getLibraryData', () => {
     const obj = { lib: { async test (str) { return str } } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ lib: { test: 'Example' } })
+    expect(data).toMatchSnapshot()
+    expect(data.lib.test()).toBe('Example')
   })
 
   it('gets the return value of a function with arguments that are objects', async () => {
@@ -30,7 +32,8 @@ describe('getLibraryData', () => {
     const obj = { lib: { async test ({ foo }) { return foo } } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ lib: { test: 'Example' } })
+    expect(data).toMatchSnapshot()
+    expect(data.lib.test()).toBe('Example')
   })
 
   it('gets the return value of a function with arguments that are arrays', async () => {
@@ -38,7 +41,8 @@ describe('getLibraryData', () => {
     const obj = { lib: { async test (arr) { return arr[1] } } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ lib: { test: 2 } })
+    expect(data).toMatchSnapshot()
+    expect(data.lib.test()).toBe(2)
   })
 
   it('gets the return value of a function with an argument of nested objects', async () => {
@@ -46,7 +50,8 @@ describe('getLibraryData', () => {
     const obj = { lib: { async test (o) { return o.foo.bar.baz } } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ lib: { test: true } })
+    expect(data).toMatchSnapshot()
+    expect(data.lib.test()).toBe(true)
   })
 
   it('gets the return value of a non-namespaced function', async () => {
@@ -54,7 +59,8 @@ describe('getLibraryData', () => {
     const obj = { async test () { return 'hiya' } }
 
     const data = await getLibraryData(obj, src)
-    expect(data).toEqual({ test: 'hiya' })
+    expect(data).toMatchSnapshot()
+    expect(data.test()).toBe('hiya')
   })
 
   it('gets the values in the conditional of an if', async () => {

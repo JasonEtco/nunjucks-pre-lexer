@@ -36,7 +36,7 @@ const schema = {
 }
 
 const data = lexer(schema, templateStr)
-// -> { getPosts: [{ title: 'A post' }] }
+// -> { getPosts: () => ([{ title: 'A post' }]) }
 ```
 
 ## Why

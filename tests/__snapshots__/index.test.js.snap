@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getLibraryData gets the return value of a function in the object 1`] = `
+Object {
+  "lib": Object {
+    "test": [Function],
+  },
+}
+`;
+
+exports[`getLibraryData gets the return value of a function with an argument of nested objects 1`] = `
+Object {
+  "lib": Object {
+    "test": [Function],
+  },
+}
+`;
+
+exports[`getLibraryData gets the return value of a function with arguments 1`] = `
+Object {
+  "lib": Object {
+    "test": [Function],
+  },
+}
+`;
+
+exports[`getLibraryData gets the return value of a function with arguments that are arrays 1`] = `
+Object {
+  "lib": Object {
+    "test": [Function],
+  },
+}
+`;
+
+exports[`getLibraryData gets the return value of a function with arguments that are objects 1`] = `
+Object {
+  "lib": Object {
+    "test": [Function],
+  },
+}
+`;
+
+exports[`getLibraryData gets the return value of a non-namespaced function 1`] = `
+Object {
+  "test": [Function],
+}
+`;
