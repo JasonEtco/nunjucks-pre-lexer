@@ -102,4 +102,18 @@ describe('lexer', () => {
     const data = await lexer(obj, src)
     expect(data).toEqual({ lib: { test: true } })
   })
+
+  it('gets the value calculated after a functions execution in a lookup', async () => {
+    const src = '{{ lib.test().example }}'
+    const obj = {
+      lib: {
+        async test () {
+          return { example: true }
+        }
+      }
+    }
+
+    const data = await lexer(obj, src)
+    expect(data.lib.test()).toEqual({ example: true })
+  })
 })
