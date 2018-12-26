@@ -52,7 +52,7 @@ function mapArguments (args: Node): any[] {
   return returnArgs
 }
 
-export async function FunCall (schema: object, node: Node, data: object) {
+export async function FunCall (schema: object, node: Node, data: any) {
   const lookupString = createObjectLookupString(node)
   const func = get(schema, lookupString)
 

@@ -103,7 +103,7 @@ describe('lexer', () => {
     expect(data).toEqual({ lib: { test: true } })
   })
 
-  it('gets the value calculated after a functions execution in a lookup', async () => {
+  it('gets the value calculated after a function\'s execution in a lookup', async () => {
     const src = '{{ lib.test().example }}'
     const obj = {
       lib: {
@@ -115,5 +115,26 @@ describe('lexer', () => {
 
     const data = await lexer(obj, src)
     expect(data.lib.test()).toEqual({ example: true })
+  })
+
+  // TODO: Allow for nested function execution
+  it.skip('gets the value calculated after a nested function\'s execution in a lookup', async () => {
+    const src = '{{ lib.test().example().foo }}'
+    const obj = {
+      lib: {
+        async test () {
+          return {
+            async example () {
+              return {
+                foo: true
+              }
+            }
+          }
+        }
+      }
+    }
+
+    const data = await lexer(obj, src)
+    expect(data.lib.test().example()).toEqual({ foo: true })
   })
 })
