@@ -44,7 +44,7 @@ describe('createObjectLookupString', () => {
     }
 
     const actual = createObjectLookupString(node)
-    expect(actual).toBe('foo().bar().baz')
+    expect(actual).toBe('foo.bar.baz')
   })
 
   it('requires val and val.value to add the value', () => {
@@ -62,7 +62,7 @@ describe('createObjectLookupString', () => {
     }
 
     const actual = createObjectLookupString(node)
-    expect(actual).toBe('foo().bar()')
+    expect(actual).toBe('foo.bar')
   })
 
   it('returns the expected value with a property of a function\'s return value', () => {
@@ -80,6 +80,6 @@ describe('createObjectLookupString', () => {
     }
 
     const actual = createObjectLookupString(node)
-    expect(actual).toBe('foo().bar')
+    expect(actual).toBe('foo.bar')
   })
 })

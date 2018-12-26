@@ -1,10 +1,8 @@
 import { Node } from './types'
 
-function getValues (node: Node, isFunCall = false, pieces: string[] = []): string[] {
+function getValues (node: Node, pieces: string[] = []): string[] {
   if (node.val && 'value' in node.val) {
-    let value = node.val.value
-    if (isFunCall) value += '()'
-    pieces.unshift(value)
+    pieces.unshift(node.val.value)
   }
 
   if ('value' in node) {
@@ -13,18 +11,18 @@ function getValues (node: Node, isFunCall = false, pieces: string[] = []): strin
 
   // LookupVal and nested object use `node.target`
   if (node.target) {
-    return getValues(node.target, false, pieces)
+    return getValues(node.target, pieces)
   }
 
   // FunCall uses `node.name`
   if (node.name) {
-    return getValues(node.name, true, pieces)
+    return getValues(node.name, pieces)
   }
 
   return pieces
 }
 
 export function createObjectLookupString (node: Node) {
-  const values = getValues(node, node.typename === 'FunCall')
+  const values = getValues(node)
   return values.join('.')
 }
