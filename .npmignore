@@ -5,3 +5,6 @@ README.md
 .gitignore
 coverage
 src
+tslint.json
+tsconfig.json
+.github
