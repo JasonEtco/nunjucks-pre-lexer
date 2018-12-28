@@ -3,11 +3,11 @@ import { ParserKeys, parsers } from './parsers'
 import { ForType, IfType, Node } from './types'
 
 function isIf (node: Node | IfType): node is IfType {
-  return (node as Node).typename === 'If'
+  return node.typename === 'If'
 }
 
 function isFor (node: Node | ForType): node is ForType {
-  return (node as Node).typename === 'For'
+  return node.typename === 'For'
 }
 
 interface CollectDataArgs {
