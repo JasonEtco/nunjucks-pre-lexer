@@ -137,4 +137,11 @@ describe('lexer', () => {
     const data = await lexer(obj, src)
     expect(data.lib.test().example()).toEqual({ foo: true })
   })
+
+  it('gets the values in a `set` operator', async () => {
+    const src = '{% set example = lib.test %}'
+    const obj = { lib: { test: true } }
+    const data = await lexer(obj, src)
+    expect(data.lib.test).toBe(true)
+  })
 })
