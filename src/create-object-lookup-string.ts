@@ -6,7 +6,11 @@ function getValues (node: Node, pieces: string[] = []): string[] {
   }
 
   if ('value' in node) {
-    pieces.unshift(node.value)
+    if (typeof node.value === 'string') {
+      pieces.unshift(node.value)
+    } else {
+      return getValues(node.value)
+    }
   }
 
   // LookupVal and nested object use `node.target`
