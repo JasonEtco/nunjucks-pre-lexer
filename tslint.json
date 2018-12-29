@@ -4,7 +4,11 @@
     "tslint-config-prettier",
     "tslint-config-standard"
   ],
+  "rulesDirectory": [
+    "tslint-no-focused-test"
+  ],
   "rules": {
+    "no-focused-test": true,
     "interface-name": [
       true,
       "never-prefix"
