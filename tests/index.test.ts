@@ -63,46 +63,6 @@ describe('lexer', () => {
     expect(data.test()).toBe('hiya')
   })
 
-  it('gets the values in the conditional of an if', async () => {
-    const src = '{% if lib.test %}hello{% endif %}'
-    const obj = { lib: { test: true } }
-
-    const data = await lexer(obj, src)
-    expect(data).toEqual({ lib: { test: true } })
-  })
-
-  it('gets the values in the body of an if', async () => {
-    const src = '{% if true %}{{ lib.test }}{% endif %}'
-    const obj = { lib: { test: true } }
-
-    const data = await lexer(obj, src)
-    expect(data).toEqual({ lib: { test: true } })
-  })
-
-  it('gets the values in the body of an else', async () => {
-    const src = '{% if true %}true{% else %}{{ lib.test }}{% endif %}'
-    const obj = { lib: { test: true } }
-
-    const data = await lexer(obj, src)
-    expect(data).toEqual({ lib: { test: true } })
-  })
-
-  it('gets the values in the iterable of a for', async () => {
-    const src = '{% for thing in lib.test %}hello{% endfor %}'
-    const obj = { lib: { test: [true, false] } }
-
-    const data = await lexer(obj, src)
-    expect(data).toEqual({ lib: { test: [true, false] } })
-  })
-
-  it('gets the values in the body of a for', async () => {
-    const src = '{% for thing in things %}{{ lib.test }}{% endfor %}'
-    const obj = { lib: { test: true } }
-
-    const data = await lexer(obj, src)
-    expect(data).toEqual({ lib: { test: true } })
-  })
-
   it('gets the value calculated after a function\'s execution in a lookup', async () => {
     const src = '{{ lib.test().example }}'
     const obj = {
@@ -138,10 +98,58 @@ describe('lexer', () => {
     expect(data.lib.test().example()).toEqual({ foo: true })
   })
 
-  it('gets the values in a `set` operator', async () => {
-    const src = '{% set example = lib.test %}'
-    const obj = { lib: { test: true } }
-    const data = await lexer(obj, src)
-    expect(data.lib.test).toBe(true)
+  describe('tags', () => {
+    describe('set', () => {
+      it('gets the value', async () => {
+        const src = '{% set example = lib.test %}'
+        const obj = { lib: { test: true } }
+        const data = await lexer(obj, src)
+        expect(data.lib.test).toBe(true)
+      })
+    })
+
+    describe('for', () => {
+      it('gets the values in the iterable of a for', async () => {
+        const src = '{% for thing in lib.test %}hello{% endfor %}'
+        const obj = { lib: { test: [true, false] } }
+
+        const data = await lexer(obj, src)
+        expect(data).toEqual({ lib: { test: [true, false] } })
+      })
+
+      it('gets the values in the body of a for', async () => {
+        const src = '{% for thing in things %}{{ lib.test }}{% endfor %}'
+        const obj = { lib: { test: true } }
+
+        const data = await lexer(obj, src)
+        expect(data).toEqual({ lib: { test: true } })
+      })
+    })
+
+    describe('if', () => {
+      it('gets the values in the conditional of an if', async () => {
+        const src = '{% if lib.test %}hello{% endif %}'
+        const obj = { lib: { test: true } }
+
+        const data = await lexer(obj, src)
+        expect(data).toEqual({ lib: { test: true } })
+      })
+
+      it('gets the values in the body of an if', async () => {
+        const src = '{% if true %}{{ lib.test }}{% endif %}'
+        const obj = { lib: { test: true } }
+
+        const data = await lexer(obj, src)
+        expect(data).toEqual({ lib: { test: true } })
+      })
+
+      it('gets the values in the body of an else', async () => {
+        const src = '{% if true %}true{% else %}{{ lib.test }}{% endif %}'
+        const obj = { lib: { test: true } }
+
+        const data = await lexer(obj, src)
+        expect(data).toEqual({ lib: { test: true } })
+      })
+    })
   })
 })
